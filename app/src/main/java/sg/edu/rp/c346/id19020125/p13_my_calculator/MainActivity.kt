@@ -7,13 +7,13 @@ import android.view.View
 import android.widget.Button
 import androidx.core.text.isDigitsOnly
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.math.abs
 
 class MainActivity : AppCompatActivity() {
     var outEquation = ""
     var equation = ""
     var stringNum = ""
-    var total = 0
-    var holdTotal = 0
+    var total = 0.00
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         var selected = selectedButton.text
         if(selected.isDigitsOnly() && equation=="") {
             stringNum += selected
-            total = stringNum.toInt()
+            total = stringNum.toDouble()
         }
         else if(selected == "+") {
             equation = "plus"
@@ -45,31 +45,43 @@ class MainActivity : AppCompatActivity() {
         else if(selected == "AC") {
             outEquation = ""
             stringNum = ""
-            total = 0
+            total = 0.00
+            equation = ""
         }
         else if(selected == ".") {
             stringNum += "."
             equation = "decimal"
         }
+        else if(selected == "%") {
+            stringNum += ""
+            equation = "percent"
+        }
+        else if(selected == "+/-") {
+            stringNum += ""
+            equation = "plus minus"
+        }
         else {
             if(selected.isDigitsOnly()) {
                 stringNum += selected
             }
-            if(equation == "plus") {
-                total += stringNum.toInt()
-            }
-            else if(equation == "minus") {
-                total -= stringNum.toInt()
-            }
-            else if(equation == "divide") {
-                total /= stringNum.toInt()
-            }
-            else if(equation == "multiply") {
-                total *= stringNum.toInt()
+        }
+        if(stringNum != "" && selected == "=") {
+            if (equation == "plus") {
+                total += stringNum.toDouble()
+            } else if (equation == "minus") {
+                total -= stringNum.toDouble()
+            } else if (equation == "divide") {
+                total /= stringNum.toDouble()
+            } else if (equation == "multiply") {
+                total *= stringNum.toDouble()
+            } else if (equation == "percent") {
+                total = stringNum.toDouble() / 100
+            }  else if (equation == "plus minus") {
+                total = abs(total)
             }
         }
-        Log.d("MainActivity", "Str num $stringNum")
-        Log.d("MainActivity", "Total $total")
+        Log.d("MainActivity",total.toString())
+        Log.d("MainActivity",outEquation)
         if(selected != "AC") {
             outEquation += selected
         }

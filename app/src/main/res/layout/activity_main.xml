@@ -21,6 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textSize="40dp"
+            android:layout_weight="1"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:text="0" />
@@ -29,7 +30,12 @@
             android:id="@+id/tvTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:textSize="40dp"
+            android:textStyle="bold"
             android:text="Total" />
+
     </TableRow>
 
     <TableRow
@@ -39,8 +45,16 @@
         <Button
             android:id="@+id/btnAC"
             android:onClick="btnOnClick"
-            android:layout_span="3"
             android:text="AC" />
+        <Button
+            android:id="@+id/btnNegative"
+            android:onClick="btnOnClick"
+            android:text="+/-" />
+        <Button
+            android:id="@+id/btnPercent"
+            android:onClick="btnOnClick"
+            android:text="%" />
+
         <Button
             android:id="@+id/btnDivide"
             android:onClick="btnOnClick"
