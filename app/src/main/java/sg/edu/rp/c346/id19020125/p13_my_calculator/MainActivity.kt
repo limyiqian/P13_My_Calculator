@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     fun btnOnClick(view: View) {
         var selectedButton = view as Button
         var selected = selectedButton.text
-        if(selected.isDigitsOnly() && equation=="") {
+        if((selected.isDigitsOnly() && equation=="") || (equation=="" && selected == ".")) {
             stringNum += selected
             total = stringNum.toDouble()
         }
@@ -48,10 +48,6 @@ class MainActivity : AppCompatActivity() {
             total = 0.00
             equation = ""
         }
-        else if(selected == ".") {
-            stringNum += "."
-            equation = "decimal"
-        }
         else if(selected == "%") {
             stringNum += ""
             equation = "percent"
@@ -61,10 +57,13 @@ class MainActivity : AppCompatActivity() {
             equation = "plus minus"
         }
         else {
-            if(selected.isDigitsOnly()) {
+            if(selected.isDigitsOnly() || selected == ".") {
                 stringNum += selected
             }
         }
+
+        Log.d("MainActivity", "strNum $stringNum $equation")
+
         if(stringNum != "" && selected == "=") {
             if (equation == "plus") {
                 total += stringNum.toDouble()
@@ -80,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                 total = abs(total)
             }
         }
-        Log.d("MainActivity",total.toString())
+        Log.d("MainActivity", "total$total")
         Log.d("MainActivity",outEquation)
         if(selected != "AC") {
             outEquation += selected
