@@ -1,0 +1,2 @@
+rootProject.name = "P13_My_Calculator"
+include ':app'
